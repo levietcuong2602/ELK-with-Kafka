@@ -1,18 +1,18 @@
-filebeat.prospectors:
-  - type: log
-    enabled: true
-    tags:
-      - app_1_nginx
-    paths:
-      - /usr/share/services/nginx/*.log
+# ============================== Filebeat inputs ===============================
+filebeat.inputs:
+- type: log
+  enabled: false
+  tags:
+    - app_1_pm2
+  paths:
+    - /usr/share/filebeat/services/node/*.log
 
-  - type: log
-    enabled: true
-    tags:
-      - app_1_pm2
-    paths:
-      - /usr/share/services/node/*.log
+# ============================== Filebeat modules ==============================
+filebeat.config.modules:
+  enabled: true
+  path: ${path.config}/modules.d/*.yml
 
+# =============================== Kibana output ==================================
 output.kafka:
   hosts: ["kafka:9092"]
   topic: "applogs"
@@ -21,3 +21,6 @@ output.kafka:
   required_acks: 1
   compression: gzip
   max_message_bytes: 1000000
+
+# ================================= Logging =====================================
+logging.level: info
