@@ -1,3 +1,4 @@
 node_modules
 elasticsearch-data
 data
+yarn.lock

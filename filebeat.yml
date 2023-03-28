@@ -1,7 +1,7 @@
 # ============================== Filebeat inputs ===============================
 filebeat.inputs:
 - type: log
-  enabled: false
+  enabled: true
   tags:
     - app_1_pm2
   paths:
@@ -13,8 +13,12 @@ filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
 
 # =============================== Kibana output ==================================
+
+# output.logstash:
+#   hosts: ["logstash:5044"]
+
 output.kafka:
-  hosts: ["kafka:9092"]
+  hosts: ["kafka:19092"]
   topic: "applogs"
   partition.round_robin:
     reachable_only: false
